@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sk.study.demo.mybatis.simple.dao.api.TUserXmlDao">
+    <!-- 配置查询所有 -->
+    <select id="findAll" resultType="com.sk.study.demo.mybatis.simple.model.TUser">
+        select * from t_user
+    </select>
+
+    <!-- 配置模糊查询 -->
+    <select id="findByName" parameterType="String" resultType="com.sk.study.demo.mybatis.simple.model.TUser">
+        select * from T_User where name like #{name}
+    </select>
+
+    <!-- 配置模糊查询 -->
+    <select id="findByVO" parameterType="com.sk.study.demo.mybatis.simple.model.VO.UserVO" resultType="com.sk.study.demo.mybatis.simple.model.TUser">
+        <!--mybatis 使用 ognl 表达式; ${} #{}
+        Object Graphic Navigation Language
+        对象   图      导航       语言
+        它是通过对象的取值方法来获取数据，在写法上把get给省略了
+        比如 ： tUser.getName -> tUser.name -->
+        select * from T_User where name like #{tUser.name}
+    </select>
+
+    <!-- 配置新增 -->
+    <insert id="addTUser" parameterType="com.sk.study.demo.mybatis.simple.model.TUser">
+        <selectKey keyProperty="id" resultType="int" order="BEFORE">
+            select S_T_USER_ID.nextval from dual
+        </selectKey>
+        insert into T_User (id, name, sex, birthday, certType, certNo) values (#{id},#{name},#{sex},#{birthday},#{certType},#{certNo})
+    </insert>
+
+    <!-- 配置新增 -->
+    <update id="updateTUser" parameterType="com.sk.study.demo.mybatis.simple.model.TUser">
+        update T_User set name = #{name} where id = #{id}
+    </update>
+
+    <!-- 配置删除 -->
+    <delete id="deleteTUser" parameterType="Integer">
+        delete from T_User where id = #{id}
+    </delete>
+</mapper>
