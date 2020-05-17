@@ -15,6 +15,7 @@
     <modules>
         <module>demo-mybatis-simple</module>
         <module>demo-mybatis-app</module>
+        <module>demo-mybatis-druid-app</module>
     </modules>
 
     <dependencies>

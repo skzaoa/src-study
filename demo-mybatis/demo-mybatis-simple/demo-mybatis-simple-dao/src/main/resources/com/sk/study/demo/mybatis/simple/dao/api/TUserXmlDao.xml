@@ -3,36 +3,116 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sk.study.demo.mybatis.simple.dao.api.TUserXmlDao">
+
+    <!--    抽取重复标签-->
+    <sql id="defaultTUserSql">
+        select * from T_User
+    </sql>
+    <sql id="defaultOrderSql">
+        order by id
+    </sql>
+
+    <resultMap id="TUserO2MMap" type="TUserO2MPO">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="sex" column="sex"/>
+        <result property="certType" column="certType"/>
+        <result property="certNo" column="certNO"/>
+        <result property="birthday" column="birthday"/>
+        <collection property="teacherPOList" ofType="TTeacherPO">
+            <result property="tid" column="tid"/>
+            <result property="subject" column="subject"/>
+        </collection>
+    </resultMap>
+
+    <resultMap id="TUserM2MMap" type="TUserM2MPO">
+        <collection property="teacherPOList" ofType="TTeacherPO">
+            <result property="tid" column="tid"/>
+            <result property="classNo" column="class_no"/>
+            <result property="gradeNo" column="grade_no"/>
+            <result property="subject" column="subject"/>
+            <association property="tUserPO" column="tid" javaType="tUserPO">
+                <result property="name" column="tname"/>
+            </association>
+        </collection>
+        <collection property="studentPOList" ofType="TStudentPO">
+            <result property="tid" column="tid"/>
+            <result property="name" column="sname"/>
+            <association property="tUserPO" column="tid" javaType="tUserPO">
+                <result property="name" column="tname"/>
+            </association>
+        </collection>
+</resultMap>
+
     <!-- 配置查询所有 -->
-    <select id="findAll" resultType="com.sk.study.demo.mybatis.simple.model.TUser">
-        select * from t_user
+    <select id="findAll" resultType="TUserPo">
+        <!--select * from t_user-->
+        <include refid="defaultTUserSql"></include>
+    </select>
+
+
+    <!-- 配置查询所有tchcher -->
+    <select id="findAllTeacher" resultMap="TUserO2MMap">
+        select  a.*, b.tid,b.subject from T_User a, T_Teacher b where a.id = b.id
+    </select>
+
+    <!-- 配置查询所有TchcherAndStudent -->
+    <select id="findAllTeacherAndStudent" resultMap="TUserM2MMap">
+        select aa.tid,aa.name tname, bb.sid,bb.name  sname,aa.grade_no,aa.class_no,aa.subject from
+            (select distinct a.*, b.tid,b.subject,b.grade_no,b.class_no from T_User a, T_Teacher b where a.id = b.id) aa
+            ,(select distinct a.*, b.sid,b.grade_no,b.class_no from T_User a, T_Student b where a.id = b.id)bb
+            where aa.grade_No = bb.grade_no and aa.class_no = bb.class_no
+            order by aa.tid,bb.sid
     </select>
 
     <!-- 配置模糊查询 -->
-    <select id="findByName" parameterType="String" resultType="com.sk.study.demo.mybatis.simple.model.TUser">
-        select * from T_User where name like #{name}
+    <select id="findByName" parameterType="String" resultType="com.sk.study.demo.mybatis.simple.model.PO.TUserPO">
+        <!--select * from T_User where name like #{name}-->
+        <include refid="defaultTUserSql"></include>
+        <where>
+            name like #{name} <!--order by id-->
+            <include refid="defaultOrderSql"></include>
+        </where>
     </select>
 
     <!-- 配置模糊查询 -->
-    <select id="findByVO" parameterType="com.sk.study.demo.mybatis.simple.model.VO.UserVO" resultType="com.sk.study.demo.mybatis.simple.model.TUser">
+    <select id="findByVO" parameterType="com.sk.study.demo.mybatis.simple.model.VO.UserVO"
+            resultType="com.sk.study.demo.mybatis.simple.model.PO.TUserPO">
         <!--mybatis 使用 ognl 表达式; ${} #{}
         Object Graphic Navigation Language
         对象   图      导航       语言
         它是通过对象的取值方法来获取数据，在写法上把get给省略了
         比如 ： tUser.getName -> tUser.name -->
-        select * from T_User where name like #{tUser.name}
+        <!--select * from T_User where 1=1-->
+        <!--select * from t_user-->
+        <include refid="defaultTUserSql"></include>
+        <where>
+            <if test="tUser.name != null">
+                and name like #{tUser.name}
+            </if>
+            <if test="tUser.sex != null">
+                and sex like #{tUser.sex}
+            </if>
+            <if test="ids != null and ids.size() >0 ">
+                <foreach collection="ids" open="and id in (" close=")" item="idNo" separator=",">
+                    #{idNo}
+                </foreach>
+            </if>
+        </where>
+        <include refid="defaultOrderSql"></include>
     </select>
 
     <!-- 配置新增 -->
-    <insert id="addTUser" parameterType="com.sk.study.demo.mybatis.simple.model.TUser">
+    <insert id="addTUser" parameterType="com.sk.study.demo.mybatis.simple.model.PO.TUserPO">
         <selectKey keyProperty="id" resultType="int" order="BEFORE">
             select S_T_USER_ID.nextval from dual
         </selectKey>
-        insert into T_User (id, name, sex, birthday, certType, certNo) values (#{id},#{name},#{sex},#{birthday},#{certType},#{certNo})
+        insert into T_User (id, name, sex, birthday, certType, certNo) values
+        (#{id},#{name},#{sex},#{birthday},#{certType},#{certNo})
     </insert>
 
     <!-- 配置新增 -->
-    <update id="updateTUser" parameterType="com.sk.study.demo.mybatis.simple.model.TUser">
+    <update id="updateTUser" parameterType="com.sk.study.demo.mybatis.simple.model.PO.TUserPO">
         update T_User set name = #{name} where id = #{id}
     </update>
 

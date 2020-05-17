@@ -11,9 +11,11 @@
         <!--     配置实体类别名   -->
         <!--    配置类别名, 配置后不再区分大小写-->
         <!--        <typeAlias type="com.sk.study.demo.mybatis.simple.model.PO.TUserPO" alias="TUserPO"></typeAlias>-->
+        <typeAlias type="com.sk.study.demo.mybatis.druid.utils.DruidDataSourceFactory" alias="DRUID"/>
         <!--    配置包别名   ,配置后整个包都配置了别名，不区分大小写 -->
-        <package name="com.sk.study.demo.mybatis.simple.model.PO"/>
         <package name="com.sk.study.demo.mybatis.simple.model.VO"/>
+        <package name="com.sk.study.demo.mybatis.simple.model.PO"/>
+<!--        <package name="com.sk.study.demo.mybatis.simple.dao.api"/>-->
     </typeAliases>
     <environments default="development">
         <!-- 配置oracle环境 -->
@@ -21,7 +23,7 @@
             <!-- 配置事务类型 -->
             <transactionManager type="JDBC"/>
             <!-- 配置数据源 -->
-            <dataSource type="POOLED">
+            <dataSource type="DRUID">
                 <property name="driver" value="${jdbc.driver}"/>
                 <property name="url" value="${jdbc.url}"/>
                 <property name="username" value="${jdbc.username}"/>

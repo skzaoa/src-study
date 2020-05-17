@@ -1,23 +1,19 @@
 package com.sk.study.demo.mybatis.simple.test;
 
-import java.util.ArrayList;
-import java.util.Date;
-
+import com.sk.study.demo.mybatis.druid.utils.MybatisUtil;
 import com.sk.study.demo.mybatis.simple.dao.api.TUserXmlDao;
 import com.sk.study.demo.mybatis.simple.model.PO.TUserPO;
 import com.sk.study.demo.mybatis.simple.model.VO.UserVO;
-import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,35 +30,22 @@ public class DemoSimpleXmlTest {
     private TUserXmlDao tUserDao;
 
     @Before
-    public void init() throws IOException {
-        //1、读取配置文件
-        in = Resources.getResourceAsStream("Mybatis-Config.xml");
-        //2、创建SqlSessionFactory工厂
-        SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
-        SqlSessionFactory factory = builder.build(in);
-        //3、使用工厂SqlSession
-        session = factory.openSession();
-        //4、使用SqlSession创建Dao接口的代理对象
+    public void init() {
+        session = MybatisUtil.getSession();
         tUserDao = session.getMapper(TUserXmlDao.class);
     }
 
     @After
-    public void destory() throws IOException {
-        session.commit();
-        //6、释放资源
-        session.close();
-        in.close();
+    public void destory() {
+        MybatisUtil.closeSession(session);
     }
-
 
     @Test
     public void findAllTest() {
         //5、使用代理对象执行方法
         List<TUserPO> tUserList = tUserDao.findAll();
-
         for (TUserPO tUser : tUserList) {
-            System.out.println(tUser);
-            logger.info(tUser.toString());
+            logger.info("{}", tUser);
         }
     }
 
@@ -71,8 +54,7 @@ public class DemoSimpleXmlTest {
         //5、使用代理对象执行方法
         List<TUserPO> tUserList = tUserDao.findByName("%2%");
         for (TUserPO tUser : tUserList) {
-            System.out.println(tUser);
-            logger.info(tUser.toString());
+            logger.info("{}", tUser);
         }
     }
 
@@ -109,10 +91,10 @@ public class DemoSimpleXmlTest {
         tUser.setBirthday(new Date());
         tUser.setCertType("I");
         tUser.setCertNo("22222222222222");
-        System.out.println(tUser);
+        logger.info("{}", tUser);
         //5、使用代理对象执行方法
         tUserDao.addTUser(tUser);
-        System.out.println(tUser);
+        logger.info("{}", tUser);
     }
 
     @Test

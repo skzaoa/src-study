@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sk.study.demo.mybatis.simple.dao.api.TUserAliasXmlDao">
+    <resultMap id="tUserAliasPO" type="com.sk.study.demo.mybatis.simple.model.PO.TUserAliasPO">
+        <id property="idAlias" column="id"></id>
+        <id property="nameAlias" column="name"></id>
+        <id property="sexAlias" column="sex"></id>
+        <id property="birthdayAlias" column="birthday"></id>
+        <id property="certTypeAlias" column="certType"></id>
+        <id property="certNoAlias" column="certNo"></id>
+    </resultMap>
+
+    <!--<select id="findAll" resultType="com.sk.study.demo.mybatis.simple.model.PO.TUserAliasPO">-->
+    <!--  采用resultMap方式  -->
+    <select id="findAll" resultMap="tUserAliasPO">
+        <!--select * from T_User-->
+        <!-- -->
+        select id, name, sex, birthday, certType, certNo from T_User
+        <!-- 别名方式 -->
+        <!--select id idAlias, name nameAlias, sex sexAlias, birthday birthdayAlias, certType certTypeAlias, certNo certNoAlias from T_User-->
+    </select>
+</mapper>

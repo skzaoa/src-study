@@ -1,8 +1,9 @@
 package com.sk.study.demo.mybatis.simple.model.VO;
 
-import com.sk.study.demo.mybatis.simple.model.TUser;
+import com.sk.study.demo.mybatis.simple.model.PO.TUserPO;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author sk
@@ -10,8 +11,17 @@ import java.io.Serializable;
  */
 public class UserVO implements Serializable {
     private static final long serialVersionUID = 1225197764191451821L;
-    TUser tUser;
-    String otherName;
+    private TUserPO tUser;
+    private String otherName;
+    private List<Integer> ids;
+
+    public List<Integer> getIds() {
+        return ids;
+    }
+
+    public void setIds(List<Integer> ids) {
+        this.ids = ids;
+    }
 
     public String getOtherName() {
         return otherName;
@@ -21,11 +31,11 @@ public class UserVO implements Serializable {
         this.otherName = otherName;
     }
 
-    public TUser gettUser() {
+    public TUserPO gettUser() {
         return tUser;
     }
 
-    public void settUser(TUser tUser) {
+    public void settUser(TUserPO tUser) {
         this.tUser = tUser;
     }
 
@@ -34,6 +44,8 @@ public class UserVO implements Serializable {
         return "UserVO{" +
                 "tUser=" + tUser +
                 ", otherName='" + otherName + '\'' +
+                ", ids=" + ids +
                 '}';
     }
 }
+

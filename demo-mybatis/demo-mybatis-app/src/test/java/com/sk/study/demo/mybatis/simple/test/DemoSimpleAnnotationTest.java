@@ -1,7 +1,7 @@
 package com.sk.study.demo.mybatis.simple.test;
 
 import com.sk.study.demo.mybatis.simple.dao.api.TUserAnnotationDao;
-import com.sk.study.demo.mybatis.simple.model.TUser;
+import com.sk.study.demo.mybatis.simple.model.PO.TUserPO;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -31,8 +31,8 @@ public class DemoSimpleAnnotationTest {
         //4、使用SqlSession创建Dao接口的代理对象
         TUserAnnotationDao tUser1Dao = session.getMapper(TUserAnnotationDao.class);
         //5、使用代理对象执行方法
-        List<TUser> tUserList = tUser1Dao.findAll();
-        for(TUser tUser : tUserList){
+        List<TUserPO> tUserList = tUser1Dao.findAll();
+        for(TUserPO tUser : tUserList){
             System.out.println(tUser);
             logger.info(tUser.toString());
         }

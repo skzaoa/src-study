@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sk.study.demo.mybatis.simple.dao.api.TStudentXmlDao">
+    <!--    抽取重复标签-->
+    <sql id="defaultTUserSql">
+        select * from T_Student
+    </sql>
+
+<!--    java程序中（property）区分大小写 oracle(column)不区分大小写-->
+    <resultMap id="TStudentMap" type="TStudentPO" >
+        <id property="sid" column="sid"/>
+        <result property="id" column="id"/>
+        <result property="classNo" column="class_no"/>
+        <result property="gradeNo" column="grade_No"/>
+
+    </resultMap>
+    <select id="findAll" resultMap="TStudentMap">
+        <include refid="defaultTUserSql"></include>
+    </select>
+</mapper>

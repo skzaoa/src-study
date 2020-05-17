@@ -1,6 +1,7 @@
 package com.sk.study.demo.mybatis.simple.dao.api;
 
-import com.sk.study.demo.mybatis.simple.model.TUser;
+import com.sk.study.demo.mybatis.simple.model.PO.TUserO2MPO;
+import com.sk.study.demo.mybatis.simple.model.PO.TUserPO;
 import com.sk.study.demo.mybatis.simple.model.VO.UserVO;
 
 import java.util.List;
@@ -14,15 +15,19 @@ public interface TUserXmlDao {
      *
      * @return
      */
-    List<TUser> findAll();
+    List<TUserPO> findAll();
 
-    List<TUser> findByName(String name);
+    List<TUserO2MPO> findAllTeacher();
 
-    List<TUser> findByVO(UserVO userVO);
+    List<TUserO2MPO> findAllTeacherAndStudent();
 
-    void addTUser(TUser tUser);
+    List<TUserPO> findByName(String name);
 
-    void updateTUser(TUser tUser);
+    List<TUserPO> findByVO(UserVO userVO);
+
+    void addTUser(TUserPO tUser);
+
+    void updateTUser(TUserPO tUser);
 
     void deleteTUser(Integer id);
 }

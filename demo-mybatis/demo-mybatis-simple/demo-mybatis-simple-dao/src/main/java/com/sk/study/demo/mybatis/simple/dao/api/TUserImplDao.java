@@ -1,6 +1,6 @@
 package com.sk.study.demo.mybatis.simple.dao.api;
 
-import com.sk.study.demo.mybatis.simple.model.TUser;
+import com.sk.study.demo.mybatis.simple.model.PO.TUserPO;
 
 import java.util.List;
 
@@ -13,8 +13,8 @@ public interface TUserImplDao {
      *
      * @return
      */
-    List<TUser> findAll();
+    List<TUserPO> findAll();
 
-
+    void insertTUser(TUserPO tUserPO);
 
 }
