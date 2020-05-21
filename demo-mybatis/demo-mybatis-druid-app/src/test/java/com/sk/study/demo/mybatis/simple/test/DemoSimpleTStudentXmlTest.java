@@ -3,8 +3,7 @@ package com.sk.study.demo.mybatis.simple.test;
 import com.sk.study.demo.mybatis.druid.utils.MybatisUtil;
 import com.sk.study.demo.mybatis.simple.dao.api.TStudentXmlDao;
 import com.sk.study.demo.mybatis.simple.dao.api.TUserXmlDao;
-import com.sk.study.demo.mybatis.simple.model.PO.TStudentPO;
-import com.sk.study.demo.mybatis.simple.model.PO.TUserO2MPO;
+import com.sk.study.demo.mybatis.simple.model.PO.*;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.After;
 import org.junit.Before;
@@ -29,7 +28,6 @@ public class DemoSimpleTStudentXmlTest {
     @Before
     public void init() {
         session = MybatisUtil.getSession();
-
     }
 
     @After
@@ -48,12 +46,22 @@ public class DemoSimpleTStudentXmlTest {
     }
 
     @Test
+    public void findByIdTest() {
+        TUserXmlDao userXmlDao = session.getMapper(TUserXmlDao.class);
+        //5、使用代理对象执行方法
+        TUserPO tUserPO = userXmlDao.findById(4);
+
+        logger.info("{}", tUserPO);
+
+    }
+
+    @Test
     public void findAllTeacherTest() {
         TUserXmlDao userXmlDao = session.getMapper(TUserXmlDao.class);
         //5、使用代理对象执行方法
-        List<TUserO2MPO> userO2MPOList = userXmlDao.findAllTeacher();
-        for (TUserO2MPO userO2MPO : userO2MPOList) {
-            logger.info("{}", userO2MPO);
+        List<TTeacherPO> teacherPOList = userXmlDao.findAllTeacher();
+        for (TTeacherPO teacherPO : teacherPOList) {
+            logger.info("{}", teacherPO);
         }
     }
 
@@ -61,8 +69,8 @@ public class DemoSimpleTStudentXmlTest {
     public void findAllTeacherAndStudentTest() {
         TUserXmlDao userXmlDao = session.getMapper(TUserXmlDao.class);
         //5、使用代理对象执行方法
-        List<TUserO2MPO> userO2MPOList = userXmlDao.findAllTeacherAndStudent();
-        for (TUserO2MPO userO2MPO : userO2MPOList) {
+        List<TUserM2MPO> userO2MPOList = userXmlDao.findAllTeacherAndStudent();
+        for (TUserM2MPO userO2MPO : userO2MPOList) {
             logger.info("{}", userO2MPO);
         }
     }

@@ -1,6 +1,7 @@
 package com.sk.study.demo.mybatis.simple.dao.api;
 
-import com.sk.study.demo.mybatis.simple.model.PO.TUserO2MPO;
+import com.sk.study.demo.mybatis.simple.model.PO.TTeacherPO;
+import com.sk.study.demo.mybatis.simple.model.PO.TUserM2MPO;
 import com.sk.study.demo.mybatis.simple.model.PO.TUserPO;
 import com.sk.study.demo.mybatis.simple.model.VO.UserVO;
 
@@ -17,9 +18,11 @@ public interface TUserXmlDao {
      */
     List<TUserPO> findAll();
 
-    List<TUserO2MPO> findAllTeacher();
+    List<TTeacherPO> findAllTeacher();
 
-    List<TUserO2MPO> findAllTeacherAndStudent();
+    List<TUserM2MPO> findAllTeacherAndStudent();
+
+    TUserPO findById(Integer id);
 
     List<TUserPO> findByName(String name);
 

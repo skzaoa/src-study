@@ -12,17 +12,14 @@
         order by id
     </sql>
 
-    <resultMap id="TUserO2MMap" type="TUserO2MPO">
-        <id property="id" column="id"/>
-        <result property="name" column="name"/>
-        <result property="sex" column="sex"/>
-        <result property="certType" column="certType"/>
-        <result property="certNo" column="certNO"/>
-        <result property="birthday" column="birthday"/>
-        <collection property="teacherPOList" ofType="TTeacherPO">
-            <result property="tid" column="tid"/>
-            <result property="subject" column="subject"/>
-        </collection>
+    <resultMap id="TTeacherMap" type="TTeacherPO">
+        <result property="id" column="id"/>
+        <result property="tid" column="tid"/>
+        <result property="classNo" column="class_no"/>
+        <result property="gradeNo" column="grade_no"/>
+        <result property="subject" column="subject"/>
+        <!--配置延迟加载 select -->
+        <association property="tUserPO" javaType="TUserPO" column="id" select="findById"/>
     </resultMap>
 
     <resultMap id="TUserM2MMap" type="TUserM2MPO">
@@ -31,14 +28,17 @@
             <result property="classNo" column="class_no"/>
             <result property="gradeNo" column="grade_no"/>
             <result property="subject" column="subject"/>
-            <association property="tUserPO" column="tid" javaType="tUserPO">
+<!--            <result property="tUserPO.name" column="tname"/>-->
+            <association property="tUserPO" column="tid" javaType="TUserPO">
+                <id property="id" column="aid"/>
                 <result property="name" column="tname"/>
             </association>
         </collection>
         <collection property="studentPOList" ofType="TStudentPO">
-            <result property="tid" column="tid"/>
-            <result property="name" column="sname"/>
-            <association property="tUserPO" column="tid" javaType="tUserPO">
+            <result property="sid" column="sid"/>
+<!--            <result property="tUserPO.name" column="sname"/>-->
+            <association property="tUserPO" column="tid" javaType="TUserPO">
+                <id property="id" column="bid"/>
                 <result property="name" column="tname"/>
             </association>
         </collection>
@@ -50,15 +50,24 @@
         <include refid="defaultTUserSql"></include>
     </select>
 
+    <!-- 配置查询用户 -->
+    <select id="findById" resultType="TUserPo" parameterType="integer">
+        <!--select * from t_user-->
+        <include refid="defaultTUserSql"></include>
+        <where>
+            id = #{id}
+        </where>
+    </select>
+
 
     <!-- 配置查询所有tchcher -->
-    <select id="findAllTeacher" resultMap="TUserO2MMap">
-        select  a.*, b.tid,b.subject from T_User a, T_Teacher b where a.id = b.id
+    <select id="findAllTeacher" resultMap="TTeacherMap">
+        select  b.* from T_Teacher b
     </select>
 
     <!-- 配置查询所有TchcherAndStudent -->
     <select id="findAllTeacherAndStudent" resultMap="TUserM2MMap">
-        select aa.tid,aa.name tname, bb.sid,bb.name  sname,aa.grade_no,aa.class_no,aa.subject from
+        select aa.id aid,bb.id bid,aa.tid,aa.name tname, bb.sid,bb.name  sname,aa.grade_no,aa.class_no,aa.subject from
             (select distinct a.*, b.tid,b.subject,b.grade_no,b.class_no from T_User a, T_Teacher b where a.id = b.id) aa
             ,(select distinct a.*, b.sid,b.grade_no,b.class_no from T_User a, T_Student b where a.id = b.id)bb
             where aa.grade_No = bb.grade_no and aa.class_no = bb.class_no

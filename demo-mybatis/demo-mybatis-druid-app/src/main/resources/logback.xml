@@ -17,6 +17,8 @@
     <property name="contentPattern" value="[[[%d{yyyy-MM-dd HH:mm:ss.SSS} | deomo-mybatis | %contextName | %level | %logger{100}:%L  | %msg %ex{full}]]]%n"/>
     <!--全量日志文件的时间滚动生成策略-->
     <property name="fullFileNamePattern" value="full-%d{yyyy-MM-dd}.log"/>
+    <!--全量日志文件的时间滚动生成策略-->
+    <property name="mybatisFileNamePattern" value="mybatis-%d{yyyy-MM-dd}.log"/>
     <!--核心组件core日志文件的时间滚动生成策略-->
     <property name="coreFileNamePattern" value="core-%d{yyyy-MM-dd}.log"/>
     <!--接口日志文件的时间滚动生成策略-->
@@ -151,6 +153,45 @@
         </encoder>
     </appender>
 
+    <!-- 记录mybatis日志同步策略的Appender -->
+    <appender name="MYBATIS_FILE_OUT_SYNC" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/mybatis/mybatis.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/mybatis/${mybatisFileNamePattern}</fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <charset>${charset}</charset>
+            <pattern>${contentPattern}</pattern>
+        </encoder>
+    </appender>
+    <!-- 记录mybatis日志异步策略的Appender -->
+    <appender name="MYBATIS_FILE_OUT_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>${discardingThreshold}</discardingThreshold>
+        <queueSize>${maxQueueSize}</queueSize>
+        <appender-ref ref="MYBATIS_FILE_OUT_SYNC"/>
+    </appender>
+
+    <logger name="java.sql.Connection">
+        <level value="INFO" />
+        <appender-ref ref="MYBATIS_FILE_OUT_ASYNC" />
+    </logger>
+
+    <!-- 记录mybatis日志 -->
+    <logger name="java.sql.Statement">
+        <level value="INFO" />
+        <appender-ref ref="MYBATIS_FILE_OUT_ASYNC" />
+    </logger>
+
+    <logger name="java.sql.CallableStatement">
+        <level value="INFO" />
+        <appender-ref ref="MYBATIS_FILE_OUT_ASYNC" />
+    </logger>
+
+    <logger name="java.sql.PreparedStatement">
+        <level value="INFO" />
+        <appender-ref ref="MYBATIS_FILE_OUT_ASYNC" />
+    </logger>
+
     <logger name="com.sk.study.demo.mybatis.simple.test" level="INFO">
         <appender-ref ref="TEST_FILE_OUT_ASYNC"/>
     </logger>
@@ -161,5 +202,6 @@
     <root level="INFO">
         <appender-ref ref="STD_OUT"/>
         <appender-ref ref="FULL_FILE_OUT_ASYNC"/>
+        <appender-ref ref="MYBATIS_FILE_OUT_ASYNC"/>
     </root>
 </configuration>
