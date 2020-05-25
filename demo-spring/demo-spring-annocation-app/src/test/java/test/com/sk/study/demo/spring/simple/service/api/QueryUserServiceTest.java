@@ -17,14 +17,17 @@ import java.util.List;
 public class QueryUserServiceTest {
 
     private static final Logger logger = LoggerFactory.getLogger(QueryUserServiceTest.class);
-    @Test
-    public void queryUserServiceTest()  {
 
-        @Autowired
-        QueryUserService queryUserService1;
+    @Autowired
+    private  QueryUserService queryUserService;
+
+    @Test
+    public  void queryUserServiceTest()  {
+
+
         List<TUserPO> tUserPOList = new ArrayList<>();
         try {
-            tUserPOList = queryUserService1.queryUser();
+            tUserPOList = queryUserService.queryUser();
         } catch (Exception e) {
             e.printStackTrace();
         }

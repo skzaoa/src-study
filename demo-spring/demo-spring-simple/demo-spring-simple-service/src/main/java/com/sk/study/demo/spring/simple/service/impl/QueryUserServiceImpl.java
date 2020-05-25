@@ -7,6 +7,7 @@ import com.sk.study.demo.spring.simple.service.api.QueryUserService;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 

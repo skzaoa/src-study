@@ -2,6 +2,7 @@ package com.sk.study.demo.spring.simple.dao.impl;
 
 import com.sk.study.demo.spring.simple.dao.api.TUserDao;
 import com.sk.study.demo.spring.simple.model.PO.TUserPO;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 

@@ -22,15 +22,19 @@ import java.util.List;
  * @author sk
  * create on  2020/5/21:22:21
  */
-@Service("queryUserService1")
+@Service("queryUserService")
 public class QueryUserService1Impl implements QueryUserService {
+    public QueryUserService1Impl() {
+        System.out.println("QueryUserService1Impl ");
+    }
 
+    @Autowired
+    TUserDao tUserDao;
     @Override
     public List<TUserPO> queryUser() throws Exception {
-        @Autowired
-        TUserDao tUserDao1;
 
-        List<TUserPO> tUserPOList = tUserDao1.findAll();
+
+        List<TUserPO> tUserPOList = tUserDao.findAll();
         if (CollectionUtils.isEmpty(tUserPOList)){
             throw new Exception("用户不存在");
         }
