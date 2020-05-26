@@ -1,10 +1,12 @@
 package com.sk.study.demo.spring.simple.service.impl;
 
-import com.sk.study.demo.spring.simple.dao.api.TUserDao;
+import com.sk.study.demo.spring.simple.dao.api.TUserDao1;
 import com.sk.study.demo.spring.simple.model.PO.TUserPO;
-import com.sk.study.demo.spring.simple.service.api.QueryUserService;
+import com.sk.study.demo.spring.simple.service.api.QueryUserService1;
 import org.apache.commons.collections.CollectionUtils;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,22 +24,31 @@ import java.util.List;
  * @author sk
  * create on  2020/5/21:22:21
  */
-@Service("queryUserService")
-public class QueryUserService1Impl implements QueryUserService {
+@Component("queryUserService1")
+public class QueryUserService1Impl implements QueryUserService1 {
     public QueryUserService1Impl() {
-        System.out.println("QueryUserService1Impl ");
+        System.out.println("QueryUserService1Impl init");
     }
 
     @Autowired
-    TUserDao tUserDao;
+    TUserDao1 tUserDao1;
+
+    @Test
+    public void tUserDao1Test() throws Exception {
+        System.out.println(tUserDao1.toString());
+        List<TUserPO> tUserPOList = tUserDao1.findAll();
+        if (CollectionUtils.isEmpty(tUserPOList)){
+            throw new Exception("用户不存在");
+        }
+    }
+
     @Override
     public List<TUserPO> queryUser() throws Exception {
-
-
-        List<TUserPO> tUserPOList = tUserDao.findAll();
+        List<TUserPO> tUserPOList = tUserDao1.findAll();
         if (CollectionUtils.isEmpty(tUserPOList)){
             throw new Exception("用户不存在");
         }
         return tUserPOList;
     }
 }
+

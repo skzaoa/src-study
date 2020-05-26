@@ -12,6 +12,10 @@
         <module>demo-mybatis</module>
         <module>demo-spring</module>
         <module>demo-basic</module>
+        <module>demo-spring-boot</module>
+        <module>demo-spring-boot-app</module>
+        <module>demo-spring-boot-app</module>
+        <module>demo-spring-boot-app</module>
     </modules>
 
     <properties>
@@ -91,7 +95,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.10</version>
+            <version>4.12</version>
         </dependency>
     </dependencies>
 
