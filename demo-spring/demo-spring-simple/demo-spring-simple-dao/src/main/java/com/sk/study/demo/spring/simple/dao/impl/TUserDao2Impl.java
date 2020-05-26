@@ -10,11 +10,11 @@ import java.util.List;
  * @author sk
  * create on  2020/5/21:22:11
  */
-@Repository("tUserDao1")
-public class TUserDao1Impl implements TUserDao {
+@Repository("tUserDao2")
+public class TUserDao2Impl implements TUserDao {
 
-    public TUserDao1Impl() {
-        System.out.println("TUserDao1Impl init");
+    public TUserDao2Impl() {
+        System.out.println("TUserDao1Imp2 init");
     }
 
     @Override

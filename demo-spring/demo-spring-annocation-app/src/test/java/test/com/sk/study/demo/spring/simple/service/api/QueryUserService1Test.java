@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,18 +15,18 @@ import java.util.List;
  * create on  2020/5/21:22:31
  */
 
-public class QueryUserServiceTest extends BaseSpringTest{
-    private static final Logger logger = LoggerFactory.getLogger(QueryUserServiceTest.class);
+public class QueryUserService1Test extends BaseSpringTest{
+    private static final Logger logger = LoggerFactory.getLogger(QueryUserService1Test.class);
 
     @Autowired
-    private QueryUserService queryUserService;
+    private QueryUserService queryUserService1;
 
     @Test
     public void queryUserServiceTest() {
         List<TUserPO> tUserPOList = new ArrayList<>();
         try {
-            logger.info(queryUserService.toString());
-            tUserPOList = queryUserService.queryUser();
+            logger.info(queryUserService1.toString());
+            tUserPOList = queryUserService1.queryUser();
         } catch (Exception e) {
             e.printStackTrace();
         }

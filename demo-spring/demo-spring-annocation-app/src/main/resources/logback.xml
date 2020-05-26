@@ -6,7 +6,7 @@
 
     <!--////////////////////////Property部分////////////////////////-->
     <!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径-->
-    <property name="LOG_HOME" value="logs/mybatis" />
+    <property name="LOG_HOME" value="logs/spring" />
     <!--当使用异步日志时，日志队列中存储的最大日志对象个数-->
     <property name="maxQueueSize" value="512"/>
     <!--数据日志的字符集-->

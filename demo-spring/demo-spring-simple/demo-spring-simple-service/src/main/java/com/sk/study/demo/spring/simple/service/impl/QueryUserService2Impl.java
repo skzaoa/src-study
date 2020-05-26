@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -25,22 +24,15 @@ import java.util.List;
  * @author sk
  * create on  2020/5/21:22:21
  */
-@Service("queryUserService1")
-public class QueryUserService1Impl implements QueryUserService {
-    public QueryUserService1Impl() {
-        System.out.println("QueryUserService1Impl init");
+@Service("queryUserService2")
+public class QueryUserService2Impl implements QueryUserService {
+    public QueryUserService2Impl() {
+        System.out.println("QueryUserService1Imp2 init");
     }
 
-    //@Autowired //按照类型注入，Ioc容器中没有则报错，一个正常注入，有多个时按照名称注入
-    //@Qualifier("tUserDao1") //在按照类型注入的基础上，按照名称注入，给类注入时不能单独使用（依托于Autowired），但是给方法注入时可以
-    @Resource(name = "tUserDao1") //此注解不依托于Autowired
-    TUserDao tUserDao; //比如用了Qualifier指定了名称，此处可以注入成功
-
-    //以上注解，只能注入其他bean数据，不能注入基本类型和String类型数据。
-    //集合类型只能通过xml来注入
-
-    //Value注解可以用于注入基本类型和String类型数据
-    //属性：value：用于指定数据的值，
+    @Autowired
+    @Qualifier("tUserDao2")
+    TUserDao tUserDao;
 
     @Test
     public void tUserDao1Test() throws Exception {
