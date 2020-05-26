@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!--    把对象创建交给spring管理-->
+<!--    使用默认构造函数：配置id和class后是用默认构造函数方式，没有默认构造函数创建不了对象-->
+<!--    <bean id="queryUserService" class="com.sk.study.demo.spring.simple.service.impl.QueryUserServiceImpl"></bean>-->
+
+<!--    使用普通工厂中的方法创建对象-->
+<!--    <bean id="instanceFactory" class="com.sk.study.demo.spring.simple.service.factory.InstanceFactory"></bean>-->
+<!--    <bean id="queryUserService" factory-bean="instanceFactory" factory-method="getQueryUserService"></bean>-->
+
+<!--    使用工厂中的静态方法创建对象-->
+<!--    <bean id="queryUserService" class="com.sk.study.demo.spring.simple.service.factory.StaticFactory" factory-method="getQueryUserService"></bean>-->
+
+
+    <bean id="tUserDao" class="com.sk.study.demo.spring.simple.dao.impl.TUserDaoImpl"></bean>
+<!--    bean作用范围调整
+            bean标签的scoap属性：
+                作用：用于bean的作用范围
+                取值：
+                    singleton: 单例（默认）
+                    prototype: 多例的
+                    request: 作用于web应用的请求范围
+                    session: 作用于web应用的会话范围
+                    global-session: 作用于集群环境会话范围（全剧会话范围），当不是集群时就是session-->
+
+
+    <!--bean对象生命周期
+            单例对象：
+                出生：容器创建时
+                活着：容器在，就活着
+                死亡：容器销毁时
+            多例对象：
+                出生：
+                活着：
+                死亡-->
+
+    <bean id="queryUserService" class="com.sk.study.demo.spring.simple.service.impl.QueryUserServiceImpl"
+        scope="singleton"></bean><!--创建QueryUserServiceImpl对象，放入spring容器中-->
+
+    <!--spring中依赖注入
+        依赖注入：
+            Dependence Injection
+         IOC作用
+            降低程序间耦合
+         能注入的数据：
+            基本数据类型和String
+            其他bean类型（在配置文件中或注解中配置过得bean）
+            复杂类型、集合类型：
+                List结构使用的标签：set、list、array 在property标签内部
+                Map结构使用的标签：map、props 在property标签内部
+                相同结构标签可以互换
+         注入的方式：
+            构造函数：使用的标签：constructor-org 在bean标签内部
+                      type:注入的数据类型（也是构造函数参数或某方法参数）
+                      index:构造函数中索引位置（从0开始）
+                      name:构造函数中指定参数
+                      value:提供基本类型和String类型的数据
+                      ref:引用关联bean对象，需在配置文件配置，如Date
+            set方法：使用的标签：property 在bean标签内部
+                      name:set方法名称
+                      value:提供基本类型和String类型的数据
+                      ref:引用关联bean对象，需在配置文件配置，如Date
+            注解-->
+    <bean id="time" class="java.util.Date"/> <!--创建时间对象，放入spring容器中-->
+</beans>
+
