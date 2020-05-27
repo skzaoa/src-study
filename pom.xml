@@ -12,7 +12,7 @@
         <module>demo-mybatis</module>
         <module>demo-spring</module>
         <module>demo-basic</module>
-        <module>demo-spring-boot</module>
+        <module>demo-springboot</module>
     </modules>
 
     <properties>
