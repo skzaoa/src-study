@@ -1,0 +1,12 @@
+jdbc:
+  driverClassName: oracle.jdbc.OracleDriver
+  url: jdbc:oracle:thin:@localhost:1521:orcl?characterEncoding=UTF-8
+  username: skuser
+  password: skuser
+
+server:
+  port: 8888
+  servlet:
+    path: "/"
+
+
