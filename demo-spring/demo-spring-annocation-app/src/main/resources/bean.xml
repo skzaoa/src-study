@@ -8,5 +8,4 @@
                 http://www.springframework.org/schema/context/spring-context.xsd">
     <!--配置扫描的包-->
     <context:component-scan base-package="com.sk.study.demo.spring.simple"></context:component-scan>
-
 </beans>

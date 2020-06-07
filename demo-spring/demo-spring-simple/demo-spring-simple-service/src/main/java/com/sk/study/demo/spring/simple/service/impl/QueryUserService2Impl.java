@@ -34,7 +34,7 @@ public class QueryUserService2Impl implements QueryUserService {
     @Qualifier("tUserDao2")
     TUserDao tUserDao;
 
-    @Test
+    //@Test
     public void tUserDao1Test() throws Exception {
         System.out.println(tUserDao.toString());
         List<TUserPO> tUserPOList = tUserDao.findAll();

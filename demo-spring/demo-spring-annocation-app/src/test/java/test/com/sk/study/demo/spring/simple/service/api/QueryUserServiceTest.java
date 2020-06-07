@@ -17,7 +17,7 @@ import java.util.List;
 public class QueryUserServiceTest extends BaseSpringTest{
     private static final Logger logger = LoggerFactory.getLogger(QueryUserServiceTest.class);
 
-    @Autowired
+   /* @Autowired
     private QueryUserService queryUserService;
 
     @Test
@@ -33,5 +33,5 @@ public class QueryUserServiceTest extends BaseSpringTest{
         for (TUserPO tUserPO : tUserPOList) {
             logger.info(tUserPO.toString());
         }
-    }
+    }*/
 }

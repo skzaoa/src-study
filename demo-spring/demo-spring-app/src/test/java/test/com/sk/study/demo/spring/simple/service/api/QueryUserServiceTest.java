@@ -17,8 +17,8 @@ import java.util.List;
  */
 public class QueryUserServiceTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(QueryUserServiceTest.class);
-    @Test
+    /*private static final Logger logger = LoggerFactory.getLogger(QueryUserServiceTest.class);
+    //@Test
     public void queryUserServiceTest()  {
         ApplicationContext ac = new ClassPathXmlApplicationContext("bean.xml");
         QueryUserService queryUserService = (QueryUserService) ac.getBean("queryUserService");
@@ -41,5 +41,5 @@ public class QueryUserServiceTest {
             logger.info(tUserPO.toString());
         }
 
-    }
+    }*/
 }

@@ -21,7 +21,7 @@ public class TUserImplDaoImpl implements TUserImplDao {
     public TUserImplDaoImpl(SqlSessionFactory factory) {
         this.factory = factory;
     }
-
+    @Override
     public List<TUserPO> findAll() {
         SqlSession session = factory.openSession();
         List<TUserPO> tUserList = session.selectList("com.sk.study.demo.mybatis.simple.dao.api.TUserImplDao.findAll");
@@ -29,6 +29,7 @@ public class TUserImplDaoImpl implements TUserImplDao {
         return tUserList;
     }
 
+    @Override
     public void insertTUser(TUserPO tUserPO) {
         logger.info(tUserPO.toString());
         SqlSession session = factory.openSession();

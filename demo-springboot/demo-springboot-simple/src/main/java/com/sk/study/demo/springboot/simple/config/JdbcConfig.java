@@ -11,7 +11,7 @@ import javax.sql.DataSource;
  * @author sk
  * create on  2020/6/4:19:44
  */
-@Configuration
+//@Configuration  //开启次java配置，使用Druid数据连接池，不开启Spring默认使用HikariCP 连接池
 //@PropertySource("classpath:application.properties")
 //@EnableConfigurationProperties(JdbcProperties.class)
 public class JdbcConfig {

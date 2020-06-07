@@ -45,7 +45,7 @@ public class DemoSimpleImplTest {
         in.close();
     }
 
-    @Test
+    //@Test
     public void insertTUserTest() throws IOException, ParseException {
         DateFormat df = new SimpleDateFormat("YYYY-MM-DD");
         Date date = df.parse("2020-01-01");

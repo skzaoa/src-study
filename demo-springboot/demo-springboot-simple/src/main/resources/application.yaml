@@ -8,5 +8,15 @@ server:
   port: 8888
   servlet:
     path: "/"
-
-
+spring:
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521:orcl?characterEncoding=UTF-8
+    username: skuser
+    password: skuser
+mybatis:
+  #通用mapper中开启了
+  #configuration:
+    #map-underscore-to-camel-case: true
+  type-aliases-package: com.sk.study.demo.springboot.simple.model
+  #mapper-locations: mapper/*.xml

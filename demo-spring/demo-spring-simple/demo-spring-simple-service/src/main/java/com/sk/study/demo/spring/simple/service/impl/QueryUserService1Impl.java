@@ -42,7 +42,7 @@ public class QueryUserService1Impl implements QueryUserService {
     //Value注解可以用于注入基本类型和String类型数据
     //属性：value：用于指定数据的值，
 
-    @Test
+    //@Test
     public void tUserDao1Test() throws Exception {
         System.out.println(tUserDao.toString());
         List<TUserPO> tUserPOList = tUserDao.findAll();

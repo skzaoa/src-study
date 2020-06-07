@@ -5,7 +5,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class QueryUserService2Test {
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         ApplicationContext ac = new ClassPathXmlApplicationContext("bean.xml");
         QueryUserService queryUserService = ac.getBean("queryUserService2", QueryUserService.class);
 
@@ -14,5 +14,5 @@ public class QueryUserService2Test {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }
