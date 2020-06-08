@@ -27,6 +27,7 @@ public class MyController {
     //@ResponseBody
     public UserBO controller(@PathVariable("id") Integer id) {
         log.info("user");
+
         return tUserService.queryById(id);
     }
 }

@@ -24,6 +24,10 @@
             <artifactId>mybatis</artifactId>
             <version>3.4.5</version>
         </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+        </dependency>
     </dependencies>
 
 
