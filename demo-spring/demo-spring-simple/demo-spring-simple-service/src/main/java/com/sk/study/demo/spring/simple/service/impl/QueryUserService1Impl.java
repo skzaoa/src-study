@@ -17,7 +17,7 @@ import java.util.List;
  * 用于创建对象的注解
  *      Component 把当前类对象存入spring容器中
  *           属性 value 用于指定bean的id，默认当前类名首字母小写
- *      Controller 同上 一般用于表现层
+ *      controller 同上 一般用于表现层
  *      Service 同上 一般用于业务层
  *      Repossitory 同上 一般用于持久层
  * 用于注入数据的注解

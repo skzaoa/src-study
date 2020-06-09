@@ -1,7 +1,7 @@
-package com.sk.study.demo.springboot.simple.controller;
+package com.sk.study.demo.springcloud.simple.user.controller;
 
-import com.sk.study.demo.springboot.simple.model.BO.UserBO;
-import com.sk.study.demo.springboot.simple.service.api.TUserService;
+import com.sk.study.demo.springcloud.simple.user.model.BO.UserBO;
+import com.sk.study.demo.springcloud.simple.user.service.api.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,16 +18,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Slf4j
 @RequestMapping("user")
-public class MyController {
+public class UserController {
 
     @Autowired
-    private TUserService tUserService;
+    private UserService userService;
 
     @GetMapping("{id}")
     //@ResponseBody
     public UserBO controller(@PathVariable("id") Integer id) {
         log.info("user");
 
-        return tUserService.queryById(id);
+        return userService.queryById(id);
     }
 }

@@ -1,13 +1,13 @@
-package com.sk.study.demo.springboot.simple.controller;
+package com.sk.study.demo.springcloud.simple.consumer.controller;
 
-import com.sk.study.demo.springboot.simple.model.BO.UserBO;
-import com.sk.study.demo.springboot.simple.service.api.TUserService;
+import com.sk.study.demo.springcloud.simple.consumer.model.BO.UserBO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 
 /**
@@ -17,17 +17,18 @@ import org.springframework.web.bind.annotation.RestController;
 //@controller
 @RestController
 @Slf4j
-@RequestMapping("user")
-public class MyController {
+@RequestMapping("consumer")
+public class ConsumerController {
 
     @Autowired
-    private TUserService tUserService;
+    private RestTemplate restTemplate;
 
     @GetMapping("{id}")
     //@ResponseBody
     public UserBO controller(@PathVariable("id") Integer id) {
-        log.info("user");
+        log.info("consumer");
 
-        return tUserService.queryById(id);
+        String url = "http://localhost:8081/user/1";
+        return restTemplate.getForObject(url, UserBO.class);
     }
 }

@@ -13,6 +13,7 @@
         <module>demo-spring</module>
         <module>demo-basic</module>
         <module>demo-springboot</module>
+        <module>demo-springcloud</module>
     </modules>
 
     <properties>
