@@ -2,6 +2,7 @@ package com.sk.study.demo.springcloud.simple.consumer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
@@ -9,6 +10,7 @@ import org.springframework.web.client.RestTemplate;
  * @author sk
  * create on  2020/6/9:22:28
  */
+@EnableDiscoveryClient
 @SpringBootApplication
 public class ConsumerApplication {
 
