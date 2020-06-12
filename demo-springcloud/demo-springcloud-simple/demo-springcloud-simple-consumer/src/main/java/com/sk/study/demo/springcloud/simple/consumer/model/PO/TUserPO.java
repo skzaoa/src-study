@@ -1,5 +1,6 @@
 package com.sk.study.demo.springcloud.simple.consumer.model.PO;
 
+import com.alibaba.fastjson.annotation.JSONType;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -12,6 +13,7 @@ import java.util.Date;
  */
 
 @Data
+@JSONType(orders = {"id","name","sex","birthday","certType","certNo"})
 public class TUserPO implements Serializable {
     private static final long serialVersionUID = 7764997911093901302L;
     private Integer id;

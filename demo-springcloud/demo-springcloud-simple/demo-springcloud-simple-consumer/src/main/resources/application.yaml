@@ -7,4 +7,21 @@ eureka:
   client:
     service-url:
       defaultZone: http://127.0.0.1:8888/eureka
-
+#feign里面需要配置 start
+ribbon:
+  ConnectionTimeOut: 500
+  ReadTimeOut: 2000
+feign:
+  hystrix:
+    enabled: true # 开启Feign的熔断功能
+#feign里面需要配置 end
+user-service:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30

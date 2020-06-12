@@ -30,6 +30,11 @@ public class UserServiceImpl implements UserService {
         userBO.setRetCode("0");
         userBO.setRetMessage("成功");
         userBO.setTUserPO(tUserPO);
+        /*try {
+            Thread.sleep(2000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }*/
         return userBO;
     }
 }
