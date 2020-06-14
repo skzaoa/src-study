@@ -1,0 +1,36 @@
+server:
+  port: 8889
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8888/eureka
+zuul:
+  routes:
+    consumer-service: #/consumer/**
+      path: /consumer/**
+      serviceId: consumer-service
+      strip-prefix: false #去除前缀设置 默认true 为true时需要加上前缀 http://localhost:8889/api/consumer/consumer/1
+    #user-service: /user-service/** #下面几行user-service的简化配置  #zuul 为每一个service配置了默认路由
+  ignored-services:
+    - user-service
+  strip-prefix: true #去除前缀全局设置 默认true
+  prefix: /api  #http://localhost:8889/api/consumer/1
+#    user-service: #service 不重要
+#      path: /user-service/**
+#      # url: http://127.0.0.1:8081
+#      serviceId: user-service
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 8000
+ribbon:
+  ConnectTimeout: 250 # 连接超时时间(ms)
+  ReadTimeout: 1000 # 通信超时时间(ms)
+  OkToRetryOnAllOperations: true # 是否对所有操作重试
+  MaxAutoRetriesNextServer: 2 # 同一服务不同实例的重试次数
+  MaxAutoRetries: 1 # 同一实例的重试次数

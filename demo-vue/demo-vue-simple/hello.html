@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hello</title>
+</head>
+<body>
+<div id="app">
+    <button @click="handleClick">点我</button>
+    <br>
+    <input type="text" v-model="num">
+    <button @click="num++">+</button>
+    <h1>
+        <br>
+        hello vue !!! {{name}}--{{num}} <!--插值表达式-->
+    </h1>
+    <br>
+    <span v-test="name"></span>
+    <br>
+    <span v-html="name"></span>
+    <br>
+
+    <input type="checkbox" v-model="lessons" value="a"/> a <br>
+    <input type="checkbox" v-model="lessons" value="b"/> b <br>
+    <input type="checkbox" v-model="lessons" value="c"/> c <br>
+
+    <h1>
+        已选择：{{lessons.join(",")}}
+    </h1>
+
+    <!--v-on-->
+    <div style="width: 100px; height: 100px; background-color: chartreuse;" @click.stop="print('div')">
+        div
+        <button @click.stop="print('button')">点我试试</button>
+        <a href="http://www.baidu.com" @click.stop.prevent="print('百度')">百度一下</a>
+    </div>
+
+    <hr>
+    <!--v-for-->
+    <ul>
+        <li v-for="user in users">
+            {{user.name + "," + user.gender + "," + user.age}}
+        </li>
+        <hr>
+        <li v-for="(user, index) in users">
+            {{index}}{{user.name + "," + user.gender + "," + user.age}}
+        </li>
+
+        <hr>
+        <li v-for="(v, k, i) in users[0]">
+            {{i + " " + k + ":" + v}}
+        </li>
+
+        <hr>
+        <ul>
+            <li v-for="i in 5" v-if.stop="i%2 === 0">
+                {{i}}
+            </li>
+        </ul>
+        <hr>
+        <ul>
+            <li v-for="i in 5">
+                <span v-if="i%2 === 0">偶数:{{i}}</span>
+                <span v-else style="background-color:#cccccc">奇数:{{i}}</span><br>
+            </li>
+        </ul>
+    </ul>
+
+    <button @click="show = !show">点我呀</button>
+    <br>
+    <h1 v-if="show">
+        看到我啦？！
+    </h1>
+    <h1 v-show="show">
+        看到我啦？！show
+    </h1>
+
+</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: "#app", //element ,vue作用的标签
+        data: {
+            name: "",
+            num: 0,
+            lessons: [],
+            users: [
+                {name: '柳岩', gender: '女', age: 21},
+                {name: '峰哥', gender: '男', age: 18},
+                {name: '范冰冰', gender: '女', age: 24},
+                {name: '刘亦菲', gender: '女', age: 18},
+                {name: '古力娜扎', gender: '女', age: 25},
+            ],
+            show: true,
+        },
+        methods: {
+            handleClick() {
+                console.log(this);
+                console.log("hahaha");
+            },
+            print(msg) {
+                console.log(msg);
+            },
+        },
+        created() {
+            this.name = "<font color='blue'>sk";
+            this.num = 1;
+        }
+    })
+</script>
+</body>
+</html>
