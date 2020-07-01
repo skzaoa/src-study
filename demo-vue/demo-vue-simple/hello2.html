@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hello2</title>
+    <style type="text/css">
+        div#box, div#box1{
+            width: 200px;
+            height: 100px;
+            color: darkgray;
+        }
+        .red {
+            background-color: red;
+        }
+        .blue {
+            background-color: blue;
+        }
+    </style>
+</head>
+
+<body>
+<div id="app">
+    <!--v-bind:class 可以省略为:class-->
+    <button @click="color='red'">红色</button>
+    <button @click="color='blue'">蓝色</button>
+    <div id="box" :class="color">
+        box里面
+    </div>
+    box外面
+    <button @click="isRed=!isRed">红or蓝</button>
+    <div id="box1" :class="{red:isRed, blue:!isRed}">
+        box里面
+    </div>
+    <!--计算属性-->
+    <h1>
+        日期{{birth}}<br>
+        日期{{birth}}<br>
+    </h1>
+    <!--watch-->
+    <input type="text" v-model="num">
+    <h1>num={{num}}</h1>
+</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: "#app",
+        data: {
+            color: "blue",
+            isRed: true,
+            birthday: 1529032123201,
+            num: 1,
+            person: {
+                name:"zhangsan",
+                age:23,
+            },
+        },
+        computed:{
+            birth() {
+                console.log(1111111111111);
+                const day = new Date(this.birthday);
+                return day.getFullYear()+"年"+day.getMonth()+"月"+day.getDay()+"日";
+            }
+        },
+        watch:{
+            num(newVal, oldVal){
+                console.log(newVal, oldVal);
+            },
+            person:{
+                deep:true,
+                handler(value){
+                    console.log(value.age);
+                },
+            },
+        },
+    });
+</script>
+</body>
+</html>
