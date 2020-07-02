@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hello4Son2Parent</title>
+
+</head>
+
+<body>
+<div id="app">
+    <count-component :num="count" @incr="add" @decr="reduce"></count-component>
+</div>
+
+
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+
+    const countComponent = {
+        template: ~
+            <div>
+            <button @click="handleAdd">+</button>
+            <button @click="handleReduce">-</button>
+        <br>
+        <h1>num={{num}}</h1>
+    </div>
+            ~,
+        props: ['num'],
+        methods: {
+            handleAdd() {
+                this.$emit('incr');
+            },
+            handleAdd() {
+                this.$emit('decr');
+            },
+        },
+    };
+    const app = new Vue({
+        el: "#app",
+        data: {
+            count: 0,
+        },
+        components: {
+            countComponent,
+        },
+        methods: {
+            add() {
+                this.count++;
+            },
+            reduce() {
+                this.count--;
+            }
+        }
+    });
+</script>
+</body>
+</html>

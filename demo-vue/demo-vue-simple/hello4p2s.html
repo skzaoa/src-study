@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hello4Parent2Son</title>
+
+</head>
+
+<body>
+<div id="app">
+    <counter1></counter1>
+    <hr>
+    <introduce :chuandizhi="msg"></introduce>
+    <hr>
+    <for-component :items="lessons"></for-component>
+    <hr>
+</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    <!--局部组件，普通对象，只用于当前页面-->
+    const counter1 = {
+        template: " <button @click='count++'>点一下,共{{count}}次</button>",
+        data() {
+            return {
+                count: 0,
+            }
+        }
+    };
+    const introduce = {
+        template: "<h1>{{chuandizhi}}</h1>",
+        props: ['chuandizhi'],
+    };
+    const forComponent = {
+        template: "<ul><li v-for='item in items'>{{item}}</li></ul>",
+        props: {
+            items: {
+                type: Array,
+                default: ['java', 'c', 'python', ''],
+            }
+        },
+    };
+    const app = new Vue({
+        el: "#app",
+        data: {
+            msg: "hi，my name is kangkang",
+            lessons: ['java', 'c', 'python'],
+        },
+        components: {
+            counter1: counter1,  <!--ES6中：如果key、value一致，可以简写为counter1-->
+            introduce,
+            forComponent,
+        }
+    });
+</script>
+</body>
+</html>
