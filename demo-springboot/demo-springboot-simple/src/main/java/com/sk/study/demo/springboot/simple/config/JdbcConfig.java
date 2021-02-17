@@ -20,7 +20,7 @@ public class JdbcConfig {
     String driver;
     @Value("${jdbc.url}")
     String url;
-    @Value("${jdbc.username}")
+    @Value("${jdbc.u sername}")
     String username;
     @Value("${jdbc.password}")
     String password;*/
